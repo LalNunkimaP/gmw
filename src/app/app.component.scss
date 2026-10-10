@@ -1,0 +1,84 @@
+.app-layout {
+	position: relative;
+	display: grid;
+	grid-template-columns: 72px minmax(0, 1fr);
+	grid-template-rows: auto minmax(0, 1fr);
+	flex: 1;
+	min-height: 0;
+	overflow: hidden;
+}
+
+app-sidebar {
+	display: block;
+	grid-column: 1;
+	grid-row: 1;
+	z-index: 10;
+}
+
+.app-layout:has(> app-sidebar:not(.collapsed)) app-sidebar {
+	position: absolute;
+	inset: 0 auto 0 0;
+	grid-row: auto;
+	height: 100%;
+	box-shadow: 6px 0 24px rgb(12 32 29 / 18%);
+}
+
+.active-page-heading {
+	display: flex;
+	align-items: baseline;
+	gap: 16px;
+	min-width: 0;
+	grid-column: 2;
+	grid-row: 1;
+	padding: 10px 24px;
+	box-sizing: border-box;
+	color: #18332f;
+}
+
+.active-page-heading p {
+	margin: 0;
+	color: #47766c;
+	font-size: 11px;
+	font-weight: 700;
+}
+
+.active-page-heading h1 {
+	min-width: 0;
+	margin: 0;
+	font-size: 22px;
+	line-height: 1.2;
+}
+
+.page-content {
+	position: relative;
+	z-index: 0;
+	grid-column: 1 / -1;
+	grid-row: 2;
+	min-width: 0;
+	min-height: 0;
+	overflow: hidden;
+}
+
+ion-app.login-route > ion-header {
+	display: none;
+}
+
+ion-app.login-route .app-layout {
+	display: block;
+	height: 100%;
+	min-height: 0;
+	overflow: auto;
+}
+
+ion-app.login-route app-sidebar,
+ion-app.login-route .active-page-heading {
+	display: none;
+}
+
+ion-app.login-route .page-content {
+	height: 100%;
+	min-height: 100%;
+	padding: 0;
+	overflow: visible;
+}
+

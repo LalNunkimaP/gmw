@@ -1,0 +1,46 @@
+<div class="ion-page">
+  <ion-content class="members-page">
+    <ion-refresher slot="fixed" (ionRefresh)="refreshMembers($event)">
+      <ion-refresher-content pullingText="Pull to refresh" refreshingSpinner="crescent"></ion-refresher-content>
+    </ion-refresher>
+
+    <section class="members-content">
+      <header class="page-heading">
+        <label class="search-field">
+          <span>Search members</span>
+          <input
+            type="search"
+            placeholder="Name or chapter"
+            [value]="searchTerm"
+            (input)="updateSearch($event)"
+          />
+        </label>
+      </header>
+
+      <div class="directory-heading">
+        <h2>Members</h2>
+        <span>{{ visibleMembers.length }} of {{ filteredMembers.length }} shown</span>
+      </div>
+
+      <div class="member-list">
+        @for (member of visibleMembers; track member.name) {
+          <article class="member-row">
+            <div class="avatar" aria-hidden="true">{{ member.initials }}</div>
+            <div class="member-name"><h3>{{ member.name }}</h3><span>Member since {{ member.joined }}</span></div>
+            <div class="member-chapter"><span>Local chapter</span><strong>{{ member.chapter }}</strong></div>
+          </article>
+        } @empty {
+          <p class="empty-state">No members match “{{ searchTerm }}”. Try another name or chapter.</p>
+        }
+      </div>
+    </section>
+
+    <ion-infinite-scroll
+      threshold="140px"
+      [disabled]="visibleMembers.length >= filteredMembers.length"
+      (ionInfinite)="loadMoreMembers($event)"
+    >
+      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more members"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+</div>

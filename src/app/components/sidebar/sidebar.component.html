@@ -1,0 +1,49 @@
+
+<aside class="sidebar" [class.collapsed]="isCollapsed">
+
+  <div class="sidebar-header">
+    <span class="brand" [hidden]="isCollapsed">
+      Community
+    </span>
+
+    <button
+      class="toggle-btn"
+      type="button"
+      (click)="toggleSidebar()"
+      [attr.aria-expanded]="!isCollapsed"
+      [attr.aria-label]="isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'"
+    >
+      ☰
+    </button>
+  </div>
+
+  <nav class="sidebar-nav" aria-label="Main navigation" [hidden]="isCollapsed" (click)="collapseSidebar()">
+    <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">
+      <span class="nav-icon">⌂</span>
+      <span class="nav-label" [hidden]="isCollapsed">Dashboard</span>
+    </a>
+
+    <a routerLink="/news" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">
+      <span class="nav-icon">▤</span>
+      <span class="nav-label" [hidden]="isCollapsed">News</span>
+    </a>
+
+    <a routerLink="/events" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">
+      <span class="nav-icon">▣</span>
+      <span class="nav-label" [hidden]="isCollapsed">Events</span>
+    </a>
+
+    <a routerLink="/members" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">
+      <span class="nav-icon">♙</span>
+      <span class="nav-label" [hidden]="isCollapsed">Members</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer" [hidden]="isCollapsed">
+    <button class="logout-btn" type="button" aria-label="Log out" (click)="logout()">
+      <ion-icon [icon]="logoutIcon" aria-hidden="true"></ion-icon>
+      <span>Log out</span>
+    </button>
+  </div>
+
+</aside>

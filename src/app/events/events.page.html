@@ -1,0 +1,39 @@
+<div class="ion-page">
+  <ion-content class="events-page">
+    <ion-refresher slot="fixed" (ionRefresh)="refreshEvents($event)">
+      <ion-refresher-content pullingText="Pull to refresh" refreshingSpinner="crescent"></ion-refresher-content>
+    </ion-refresher>
+
+    <section class="events-content">    r
+
+      <section class="event-list" aria-label="Upcoming events">
+        <!-- <h2>Hunruat | Upcoming Events</h2> -->
+        @for (event of visibleEvents; track event.title; let first = $first) {
+          <article [id]="event.id ?? null" class="event-item" [class.has-image]="(event.images?.length ?? 0) > 0">
+            <div class="date-block" aria-label="{{ event.weekday }} {{ event.month }} {{ event.day }}">
+              <span>{{ event.month }}</span>
+              <strong>{{ event.day }}</strong>
+            </div>
+            @if (event.images?.length) {
+              <app-image-gallery class="event-gallery" [images]="event.images" [label]="event.title"></app-image-gallery>
+            }
+            <div class="event-details">
+              <div class="event-type">{{ event.type }}</div>
+              <h3>{{ event.title }}</h3>
+              <p>{{ event.weekday }} · {{ event.time }}</p>
+              <p>{{ event.location }}</p>
+            </div>
+          </article>
+        }
+      </section>
+    </section>
+
+    <ion-infinite-scroll
+      threshold="140px"
+      [disabled]="visibleEventCount >= events.length"
+      (ionInfinite)="loadMoreEvents($event)"
+    >
+      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more events"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+</div>

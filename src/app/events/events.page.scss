@@ -1,0 +1,137 @@
+.events-page {
+  --background: #f6f8f5;
+  color: #18332f;
+}
+
+.events-content {
+  min-height: 100%;
+  padding: 8px 12px 36px;
+  box-sizing: border-box;
+}
+
+.page-heading {
+  max-width: 760px;
+  margin-bottom: 32px;
+}
+
+.eyebrow {
+  margin: 0 0 9px;
+  color: #47766c;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 8px;
+  font-size: 32px;
+  line-height: 1.15;
+}
+
+.page-heading > p:last-child,
+.event-details p {
+  color: #60736e;
+  line-height: 1.55;
+}
+
+.page-heading > p:last-child {
+  margin-bottom: 0;
+}
+
+.event-list > h2 {
+  margin-bottom: 0;
+  padding: 0 0 14px;
+  border-bottom: 1px solid #dce5df;
+  font-size: 18px;
+}
+
+.event-item {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  align-items: center;
+  gap: 22px;
+  padding: 19px 0;
+  border-bottom: 1px solid #dce5df;
+}
+
+.event-item.has-image {
+  grid-template-columns: 64px minmax(180px, 0.42fr) minmax(0, 1fr);
+}
+
+.date-block {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 2px;
+  flex: 0 0 64px;
+  aspect-ratio: 1;
+  background: #e5f0ea;
+  color: #176451;
+}
+
+.date-block span {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.date-block strong {
+  font-size: 27px;
+  line-height: 1;
+}
+
+.event-details {
+  grid-column: 2;
+  min-width: 0;
+}
+
+.event-item.has-image .event-details {
+  grid-column: 3;
+}
+
+.event-type {
+  margin-bottom: 5px;
+  color: #b7673d;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.event-details h3 {
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.event-details p {
+  margin-bottom: 2px;
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 27px;
+  }
+
+  .event-item {
+    grid-template-columns: 54px minmax(0, 1fr);
+    align-items: start;
+    gap: 14px;
+  }
+
+  .event-item.has-image {
+    grid-template-columns: 54px minmax(0, 1fr);
+  }
+
+  .event-item.has-image .event-details {
+    grid-column: 1 / -1;
+  }
+
+  .date-block {
+    flex-basis: 54px;
+  }
+
+}

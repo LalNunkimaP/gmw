@@ -1,0 +1,121 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.gallery {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #e8eeea;
+  isolation: isolate;
+}
+
+.gallery-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+  touch-action: pan-y;
+}
+
+.gallery-control {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  transform: translateY(-50%);
+  border: 1px solid rgb(255 255 255 / 55%);
+  border-radius: 50%;
+  background: rgb(255 255 255 / 42%);
+  color: #18332f;
+  cursor: pointer;
+  backdrop-filter: blur(8px) saturate(125%);
+  -webkit-backdrop-filter: blur(8px) saturate(125%);
+  box-shadow: 0 1px 5px rgb(0 0 0 / 10%);
+  transition: background-color 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.gallery-control ion-icon {
+  font-size: 20px;
+}
+
+.gallery-control:hover,
+.gallery-control:focus-visible {
+  background: rgb(255 255 255 / 86%);
+  color: #176451;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 16%);
+}
+
+.gallery-control:focus-visible,
+.image-action button:focus-visible {
+  outline: 2px solid #176451;
+  outline-offset: 2px;
+}
+
+.previous {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+.gallery-count {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: rgb(24 51 47 / 82%);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.image-action {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 2;
+  padding: 4px;
+  border: 1px solid #dce5df;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 18%);
+}
+
+.image-action button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #18332f;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.image-action button:hover {
+  background: #e5f0ea;
+}
+
+.image-action ion-icon {
+  font-size: 18px;
+}
+
+@media (max-width: 600px) {
+  .gallery-image {
+    aspect-ratio: 16 / 9;
+  }
+}

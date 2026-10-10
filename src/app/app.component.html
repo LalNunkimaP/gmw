@@ -1,3 +1,20 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
+<ion-app [class.login-route]="isLoginRoute()">
+  <ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+      <ion-title>Goa Mizo Welfare</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="app-layout">
+    <app-sidebar></app-sidebar>
+
+    <header class="active-page-heading" aria-live="polite">
+      <p>{{ pageHeader().eyebrow }}</p>
+      <h1>{{ pageHeader().title }}</h1>
+    </header>
+
+    <main class="page-content">
+      <ion-router-outlet [animated]="false"></ion-router-outlet>
+    </main>
+  </div>
 </ion-app>

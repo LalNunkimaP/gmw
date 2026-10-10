@@ -1,0 +1,35 @@
+<div class="gallery" [attr.aria-label]="label">
+  @if (currentImage; as image) {
+    <img
+      class="gallery-image"
+      [src]="image.src"
+      [alt]="image.alt"
+      [attr.draggable]="false"
+      (pointerdown)="startLongPress($event)"
+      (pointerup)="cancelLongPress()"
+      (pointercancel)="cancelLongPress()"
+      (contextmenu)="openContextMenu($event)"
+      loading="lazy"
+      decoding="async"
+    />
+  }
+
+  @if (images.length > 1) {
+    <button class="gallery-control previous" type="button" aria-label="Previous image" (click)="showPrevious()">
+      <ion-icon [icon]="previousIcon" aria-hidden="true"></ion-icon>
+    </button>
+    <button class="gallery-control next" type="button" aria-label="Next image" (click)="showNext()">
+      <ion-icon [icon]="nextIcon" aria-hidden="true"></ion-icon>
+    </button>
+    <span class="gallery-count" aria-live="polite">{{ activeIndex + 1 }} / {{ images.length }}</span>
+  }
+
+  @if (isDownloadActionVisible) {
+    <div class="image-action" role="menu">
+      <button type="button" role="menuitem" (click)="downloadCurrentImage()">
+        <ion-icon [icon]="downloadIcon" aria-hidden="true"></ion-icon>
+        <span>Download image</span>
+      </button>
+    </div>
+  }
+</div>

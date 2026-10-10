@@ -1,0 +1,38 @@
+<div class="ion-page">
+  <ion-content class="news-page">
+    <ion-refresher slot="fixed" (ionRefresh)="refreshArticles($event)">
+      <ion-refresher-content pullingText="Pull to refresh" refreshingSpinner="crescent"></ion-refresher-content>
+    </ion-refresher>
+
+    <section class="news-content">
+
+      <div class="news-list">
+        @for (article of visibleArticles; track article.title; let first = $first) {
+          <article [id]="article.id ?? null" class="news-item" [class.featured]="first" [class.has-image]="(article.images?.length ?? 0) > 0">
+            @if (article.images?.length) {
+              <app-image-gallery class="article-gallery" [images]="article.images" [label]="article.title"></app-image-gallery>
+            }
+            <div class="article-body">
+              <div class="article-meta">
+                <span>{{ article.tag }}</span>
+                <time [attr.datetime]="article.date">{{ article.dateLabel }}</time>
+              </div>
+              <div class="article-copy">
+                <h2>{{ article.title }}</h2>
+                <p>{{ article.summary }}</p>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+
+    <ion-infinite-scroll
+      threshold="140px"
+      [disabled]="visibleArticleCount >= articles.length"
+      (ionInfinite)="loadMoreArticles($event)"
+    >
+      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more news"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+</div>

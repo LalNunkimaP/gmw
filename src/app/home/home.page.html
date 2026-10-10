@@ -1,20 +1,55 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="ion-page">
+  <ion-content class="dashboard-page">
+    <ion-refresher slot="fixed" (ionRefresh)="refreshActivity($event)">
+      <ion-refresher-content pullingText="Pull to refresh" refreshingSpinner="crescent"></ion-refresher-content>
+    </ion-refresher>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <div class="dashboard">
+      <section class="metric-grid" aria-label="Community summary">
+        @for (metric of metrics; track metric.label) {
+          <article class="metric">
+            <p>{{ metric.label }}</p>
+            <strong>{{ metric.value }}</strong>
+            <span>{{ metric.note }}</span>
+          </article>
+        }
+      </section>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>
+      <section class="activity-section">
+        @for (item of visibleActivity; track item.id) {
+            @if (item.kind === 'member') {
+              <article class="activity-row">
+                <div class="activity-meta">
+                  <span>MEMBER THAR</span>
+                  <time [attr.datetime]="item.date">{{ item.dateLabel }}</time>
+                </div>
+                <h3>{{ item.name }}, Goa Mizo Welfare ah kan lo lawm a che.</h3>
+              </article>
+            } @else {
+              <a class="activity-row activity-link" [class.with-image]="item.imageSrc" [routerLink]="['/news']" [fragment]="item.id">
+                @if (item.imageSrc) {
+                  <img class="activity-image" [src]="item.imageSrc" [alt]="item.imageAlt" loading="lazy" decoding="async" />
+                }
+                <div class="activity-link-copy">
+                  <div class="activity-meta">
+                    <span>{{ item.tag }}</span>
+                    <time [attr.datetime]="item.date">{{ item.dateLabel }}</time>
+                  </div>
+                  <h3>{{ item.title }}</h3>
+                  <p>{{ item.summary }}</p>
+                </div>
+              </a>
+            }
+        }
+      </section>
+    </div>
+
+    <ion-infinite-scroll
+      threshold="140px"
+      [disabled]="visibleActivityCount >= activity.length"
+      (ionInfinite)="loadMoreActivity($event)"
+    >
+      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Loading more activity"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+</div>
