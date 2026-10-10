@@ -1,0 +1,7 @@
+{
+  "name": "gmw",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
